@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách sản phẩm</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        body {
+            background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+            min-height: 100vh;
+        }
+
+        .page-shell {
+            border-radius: 1.25rem;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+        }
+
+        .table thead th {
+            border-top: 0;
+            background: #0d6efd;
+            color: #fff;
+        }
+
+        .table tbody tr:hover {
+            background: #f7fbff;
+        }
+    </style>
+</head>
+<body>
+<div class="container py-5">
+    <div class="bg-white page-shell p-4 p-md-5 mb-4">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+            <div>
+                <div class="text-uppercase text-primary small font-weight-bold mb-2">Quản lý sản phẩm</div>
+                <h1 class="h2 font-weight-bold mb-2">Danh sách sản phẩm</h1>
+                <p class="text-muted mb-0">Bố cục rõ ràng hơn, dễ đọc hơn và thân thiện với màn hình nhỏ.</p>
+            </div>
+            <div class="mt-3 mt-md-0">
+                <a class="btn btn-outline-primary mr-2" th:href="@{/home}">Về trang chủ</a>
+                <span class="badge badge-primary badge-pill px-3 py-2" th:text="${products != null ? products.size() : 0}">0</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="card page-shell border-0">
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0 align-middle">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="pl-4">ID</th>
+                        <th scope="col">Tên</th>
+                        <th scope="col">Mô tả</th>
+                        <th scope="col">Danh mục</th>
+                        <th scope="col" class="text-right pr-4">Giá</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="product : ${products}">
+                        <td class="pl-4 font-weight-bold" th:text="${product.id}">1</td>
+                        <td>
+                            <div class="font-weight-bold" th:text="${product.name}">Tên sản phẩm</div>
+                        </td>
+                        <td class="text-muted" th:text="${product.description}">Mô tả</td>
+                        <td>
+                            <span class="badge badge-info badge-pill px-3 py-2" th:text="${product.category}">Danh mục</span>
+                        </td>
+                        <td class="text-right pr-4 font-weight-bold text-success"
+                            th:text="${product.price != null ? product.price + ' đ' : 'Liên hệ'}">0 đ</td>
+                    </tr>
+                    <tr th:if="${products == null or products.isEmpty()}">
+                        <td colspan="5" class="text-center text-muted py-5">
+                            Chưa có sản phẩm nào để hiển thị.
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

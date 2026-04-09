@@ -1,0 +1,42 @@
+    <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Danh sách thực đơn</title>
+    <style>
+        .out-of-stock {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Danh sách món ăn</h2>
+
+<div th:if="${dishes == null or #lists.isEmpty(dishes)}">
+    <p>Hiện tại nhà hàng đang cập nhật thực đơn, vui lòng quay lại sau</p>
+</div>
+
+<table border="1" th:unless="${dishes == null or #lists.isEmpty(dishes)}">
+    <tr>
+        <th>ID</th>
+        <th>Tên món</th>
+        <th>Giá</th>
+        <th>Trạng thái</th>
+    </tr>
+
+    <tr th:each="dish : ${dishes}">
+        <td th:text="${dish.id}"></td>
+        <td th:text="${dish.name}"></td>
+        <td th:text="${dish.price}"></td>
+
+        <td>
+            <span th:if="${dish.available}" th:text="'Còn hàng'"></span>
+            <span th:unless="${dish.available}"
+                  th:text="'Hết hàng'"
+                  class="out-of-stock"></span>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>

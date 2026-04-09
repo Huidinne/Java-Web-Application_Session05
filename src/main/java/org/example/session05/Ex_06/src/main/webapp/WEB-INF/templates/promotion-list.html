@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="vi"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/main-layout}">
+<head>
+    <title>Thực đơn ưu đãi</title>
+    <style>
+        h1 { margin-top: 0; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { border-bottom: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #f3f4f6; }
+        .original { text-decoration: line-through; color: #6b7280; }
+        .discounted { color: #047857; font-weight: 700; }
+        .hot-deal { display: inline-block; margin-left: 8px; padding: 3px 8px; background: #dc2626; color: #fff; border-radius: 999px; font-size: 12px; }
+        .empty-message { padding: 16px; background: #fff7ed; border: 1px solid #fdba74; border-radius: 8px; }
+    </style>
+</head>
+<body>
+<section layout:fragment="content">
+    <h1>Thực đơn ưu đãi</h1>
+
+    <div class="empty-message" th:if="${#lists.isEmpty(dishes)}">
+        Hiện chưa có chương trình ưu đãi, quý khách vui lòng quay lại sau!
+    </div>
+
+    <table th:unless="${#lists.isEmpty(dishes)}">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên món</th>
+            <th>Giá gốc</th>
+            <th>Giảm giá</th>
+            <th>Giá sau giảm</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="dish : ${dishes}">
+            <td th:text="${dish.id}">1</td>
+            <td>
+                <span th:text="${dish.name}">Tên món</span>
+                <span class="hot-deal" th:if="${dish.discountPercent > 20}">HOT DEAL</span>
+            </td>
+            <td class="original"
+                th:text="${#numbers.formatDecimal(dish.originalPrice, 0, 'POINT', 0, 'COMMA')} + ' VNĐ'">
+                350.000 VNĐ
+            </td>
+            <td th:text="${dish.discountPercent} + '%'">20%</td>
+            <td class="discounted"
+                th:text="${#numbers.formatDecimal(dish.originalPrice * (100 - dish.discountPercent) / 100, 0, 'POINT', 0, 'COMMA')} + ' VNĐ'">
+                280.000 VNĐ
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>
+

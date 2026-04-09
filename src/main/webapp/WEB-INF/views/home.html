@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Trang chủ</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        body {
+            background: linear-gradient(180deg, #f8fbff 0%, #eef4ff 100%);
+            min-height: 100vh;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #0d6efd 0%, #5b8def 100%);
+            color: #fff;
+            border-radius: 1.25rem;
+            box-shadow: 0 12px 35px rgba(13, 110, 253, 0.18);
+        }
+
+        .feature-card {
+            border: 0;
+            border-radius: 1rem;
+            box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+        }
+
+        .soft-badge {
+            display: inline-block;
+            padding: .35rem .75rem;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.18);
+            color: #fff;
+            font-size: .875rem;
+        }
+    </style>
+</head>
+<body>
+<div class="container py-5">
+    <div class="hero p-4 p-md-5 mb-4">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <span class="soft-badge mb-3">Spring MVC • Thymeleaf • Bootstrap</span>
+                <h1 class="display-4 font-weight-bold mb-3" th:text="${message}">Xin chào!</h1>
+                <p class="lead mb-4">
+                    Đây là giao diện trang chủ được làm lại gọn gàng, hiện đại và dễ nhìn hơn.
+                    Từ đây bạn có thể chuyển sang danh sách sản phẩm chỉ với một cú nhấp.
+                </p>
+                <a class="btn btn-light btn-lg font-weight-bold mr-2" th:href="@{/home/product-lists}">Xem sản phẩm</a>
+                <a class="btn btn-outline-light btn-lg" th:href="@{/home}">Tải lại trang</a>
+            </div>
+            <div class="col-md-4 mt-4 mt-md-0">
+                <div class="bg-white text-dark rounded-lg p-4 shadow-sm">
+                    <div class="text-uppercase text-muted small mb-2">Tổng quan</div>
+                    <div class="display-4 font-weight-bold text-primary" th:text="${items != null ? items.size() : 0}">0</div>
+                    <div class="text-secondary">Điểm nổi bật trên trang</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-7 mb-4">
+            <div class="card feature-card h-100">
+                <div class="card-body p-4">
+                    <h3 class="h4 font-weight-bold mb-3">Điểm nổi bật</h3>
+                    <div class="list-group list-group-flush">
+                        <div class="list-group-item d-flex align-items-center px-0" th:each="item : ${items}">
+                            <span class="badge badge-primary badge-pill mr-3">✓</span>
+                            <span th:text="${item}">Mục nội dung</span>
+                        </div>
+                        <div class="list-group-item px-0 text-muted" th:if="${items == null or items.isEmpty()}">
+                            Chưa có nội dung nào được thêm vào.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-5 mb-4">
+            <div class="card feature-card h-100 border-0">
+                <div class="card-body p-4">
+                    <h3 class="h4 font-weight-bold mb-3">Bắt đầu nhanh</h3>
+                    <p class="text-secondary mb-4">
+                        Trang này đang lấy dữ liệu từ controller nên bạn có thể mở rộng thêm danh mục,
+                        sản phẩm hoặc trang chi tiết rất dễ dàng.
+                    </p>
+                    <a class="btn btn-primary btn-block btn-lg" th:href="@{/home/product-lists}">Đi tới danh sách sản phẩm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+</html>

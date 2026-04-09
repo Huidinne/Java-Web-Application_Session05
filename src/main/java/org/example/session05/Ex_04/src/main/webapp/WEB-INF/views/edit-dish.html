@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{templates/layout/main-layout}"
+      lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Chỉnh sửa món ăn</title>
+</head>
+<body>
+<section layout:fragment="content">
+<h1>Chỉnh sửa món ăn</h1>
+
+<form th:action="@{|/bai3/edit/${dish.id}|}" th:object="${dish}" method="post">
+    <input type="hidden" th:field="*{id}">
+
+    <div>
+        <label for="name">Tên món:</label>
+        <input id="name" type="text" th:field="*{name}" required>
+    </div>
+
+    <div>
+        <label for="price">Giá:</label>
+        <input id="price" type="number" th:field="*{price}" min="0" step="1000" required>
+    </div>
+
+    <div>
+        <label for="available">Còn phục vụ:</label>
+        <input id="available" type="checkbox" th:field="*{available}">
+    </div>
+
+    <button type="submit">Lưu thay đổi</button>
+    <a th:href="@{/bai3/dishes}">Quay lại danh sách</a>
+</form>
+
+</section>
+
+</body>
+</html>
